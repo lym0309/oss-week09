@@ -6,3 +6,24 @@
 // 실행: 터미널에서 node check.js
 // 확인: 출력이 주석의 예상과 전부 같습니다.
 // 커밋 메시지: p6: check (P7 에서 늘린 것은 p7: reasons 에 같이)
+
+import { toDays, isGoodDay, summarize } from "./logic.js";
+
+// 순서대로: 둘 다 기준 아래 / 둘 다 기준과 같음 / 풍속만 넘음 / 강수만 넘음
+const daily = {
+  time: ["11-21", "11-22", "11-23", "11-24"],
+  temperature_2m_max: [12, 9.5, 14, 7.3],
+  precipitation_probability_max: [10, 30, 20, 65],
+  wind_speed_10m_max: [6.2, 10, 15.4, 4.8],
+};
+
+const limits = { rain: 30, wind: 10 };
+const days = toDays(daily);
+
+console.log(days[0]); // 11-21
+console.log(isGoodDay(days[0], limits)); // true
+console.log(isGoodDay(days[1], limits)); // true
+console.log(isGoodDay(days[2], limits)); // false
+console.log(isGoodDay(days[3], limits)); // false
+console.log(summarize(days, limits)); // good for a run on 2 of 4 days
+console.log(summarize([], limits)); // good for a run on 0 of 0 days
