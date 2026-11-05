@@ -53,6 +53,14 @@ function render() {
   rowsEl.replaceChildren(...state.days.map(dayRow));
 }
 
+function input_event() {
+  state.limits = { rain: Number(rainInput.value), wind: Number(windInput.value) };
+  render();
+}
+
+rainInput.addEventListener("input", input_event);
+windInput.addEventListener("input", input_event);
+
 form.addEventListener("submit", async (event) => {
   event.preventDefault();
 
